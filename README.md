@@ -14,4 +14,4 @@ The game opens with a random "challenge" tile selected and streak count set to 0
 The aim of the game is to move through the whole grid identifying only matches, and to clear all tiles as quickly as possible.
 
 ## My rationale for attempting a clone
-I'm struck by the elegance of this game and also by its aesthetic appeal. Attempting to clone it would pose quite a range of challenges, and I am envisaging working on it iteratively
+I'm struck by the elegance of this game and also by its aesthetic appeal. Attempting to clone it would pose quite a range of challenges, and I am envisaging working on it iteratively. For further discussion, please see the repo wiki (https://github.com/carolshergold/tiles/wiki)
