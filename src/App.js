@@ -46,7 +46,7 @@ function App() {
   return (
     <div>
     <h1>Tiles v3 - React and JSX</h1>
-    <button onClick={generateTileSet}>New Game</button>
+    <button onClick={generateTileSet}>Play</button>
     <div className="container">
      <div className="tile-grid">
       {tiles.map(tile => (
