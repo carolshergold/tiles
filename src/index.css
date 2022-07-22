@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@900&display=swap")
+
+/* base styles */
+html {
+  font-size: 20px;
+  font-family:  'Roboto Slab', serif;
+}
