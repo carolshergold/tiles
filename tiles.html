@@ -10,84 +10,77 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@900&display=swap"
     rel="stylesheet">
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 </head>
 
 <body>
-
-  <h1>Tiles clone v1</h1>
+  <script src="Cell.js"></script>
+  <h1>Tiles clone v2</h1>
+  <!----
+  <p>Built out Cell.js as an attempt to create 30 cells using javascript</p>
+  <p>Then attempted to add React and JSX elements to the code in order to render 
+    the Tileset onto the browser. Got as far as manually creating 2 cells and 
+    rendering them using JSX, but not able to figure out how to generate all 
+    tile data from the Cell object.
+  </p>
+  <p>Switching to a fully React based solution for next iteration</p>
+-->
 
   <div class='container'>
     <div class="tile-grid">
-      <div class='cell'>
-        <div class="layer-back color-1"></div>
-        <div class="layer-mid color-3"></div>
-        <div class="layer-front color-4"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-2"></div>
-        <div class="layer-mid color-7"></div>
-        <div class="layer-front color-8"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-9"></div>
-        <div class="layer-mid color-1"></div>
-        <div class="layer-front color-2"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-1"></div>
-        <div class="layer-mid color-4"></div>
-        <div class="layer-front color-7"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-8"></div>
-        <div class="layer-mid color-7"></div>
-        <div class="layer-front color-8"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-2"></div>
-        <div class="layer-mid color-4"></div>
-        <div class="layer-front color-3"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-9"></div>
-        <div class="layer-mid color-1"></div>
-        <div class="layer-front color-2"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-8"></div>
-        <div class="layer-mid color-2"></div>
-        <div class="layer-front color-1"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-3"></div>
-        <div class="layer-mid color-4"></div>
-        <div class="layer-front color-5"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-7"></div>
-        <div class="layer-mid color-1"></div>
-        <div class="layer-front color-3"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-8"></div>
-        <div class="layer-mid color-1"></div>
-        <div class="layer-front color-2"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-7"></div>
-        <div class="layer-mid color-2"></div>
-        <div class="layer-front color-5"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-9"></div>
-        <div class="layer-mid color-7"></div>
-        <div class="layer-front color-2"></div>
-      </div>
-      <div class='cell'>
-        <div class="layer-back color-"></div>
-        <div class="layer-mid color-"></div>
-        <div class="layer-front color-"></div>
-      </div>
+      <div id="root"></div>
+      <script type="text/babel">
+        const linkData = [
+          {
+            id: 0,
+            bg: "layer-back color-1",
+            mid: "layer-mid color-9",
+            front: "layer-front color-4"
+          },
+          {
+            id: 1,
+            bg: "layer-back color-3",
+            mid: "layer-mid color-4",
+            front: "layer-front color-5"
+          }
+        ];
+
+        function Link(props) {
+          const divId = "cell"+props.key;
+          return (
+            
+            <div id={divId} className="cell">
+              <div className={props.bg}></div>
+              <div className={props.mid}></div>
+              <div className={props.front}></div>
+            </div>
+          )
+        }
+
+        function App() {
+          return (
+            <section>
+              {linkData.map(function(link) {
+                return (
+                  <Link
+                    key={link.id}
+                    bg={link.bg}
+                    mid={link.mid}
+                    front={link.front}
+                  />
+                );
+              }
+              )
+              } </section>
+          );
+        }
+
+        ReactDOM.render(<App />, document.getElementById("root"));
+      
+      
+      </script>   
     </div>
   </div>
 </body>
