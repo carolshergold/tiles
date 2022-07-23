@@ -39,26 +39,30 @@ function App() {
     }
     setTiles(generatedTiles)
     setTurns(0)
+    var tmp = Math.floor(Math.random() * 30)
+    setSelected(tmp)
 
     console.log(tiles)
+    console.log("Selected to be set to: " + tmp)
+    console.log(selected)
   }
 
   return (
     <div>
-    <h1>Tiles v3 - React and JSX</h1>
-    <button onClick={generateTileSet}>Play</button>
-    <div className="container">
-     <div className="tile-grid">
-      {tiles.map(tile => (
-        <div className="cell" key={tile.id}>
-          <div className={tile.bg}></div> 
-          <div className={tile.mid}></div> 
-          <div className={tile.fg}></div> 
+      <h1>Tiles v3 - React and JSX</h1>
+      <button onClick={generateTileSet}>Play</button>
+      <div className="container">
+        <div className="tile-grid">
+          {tiles.map(tile => (
+            <div key={tile.id} id={tile.id} 
+                className={"cell" +  (tile.id == selected ? " selected" : "")}>
+              <div className={tile.bg}></div> 
+              <div className={tile.mid}></div> 
+              <div className={tile.fg}></div> 
+            </div>
+          ))}
         </div>
-      ))}
-      
-     </div>
-    </div>
+      </div>
     </div>
   );
 }

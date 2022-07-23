@@ -19,6 +19,7 @@ h1 {
   background-color: rgb(232,232,232);
   width: 80px;
   aspect-ratio: 1 / 1;  
+  z-index: 5;
 }
 
 .layer-back {
@@ -39,7 +40,7 @@ h1 {
 .layer-front {
   position:relative;
   top:50%; right: 7%;
-  z-index: 2;
+  z-index: 3;
   width: 34%;
   height: 40%;
 }
@@ -48,6 +49,9 @@ h1 {
   display: none;
 }
 
+.selected {
+  border: 6px solid rgb(169, 219, 20);
+}
 
 .color-1 {
   background-color: blueviolet;
@@ -97,4 +101,5 @@ button {
   cursor: pointer;
   font-size: 1em;
 }
+
 
