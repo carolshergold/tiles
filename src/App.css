@@ -1,0 +1,181 @@
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width:500px;
+}
+
+.cell {
+  display: flex;
+  background-color: rgb(232,232,232);
+  width: 100px;
+  aspect-ratio: 1 / 1;  
+  z-index: 5;
+  border: 6px solid white;
+}
+
+.layer-back {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+.layer-mid {
+  position: relative;
+  top: 25%; left: 15%;
+  z-index: 2;
+  width: 70%;
+  height: 69%;
+}
+
+.layer-front {
+  position:relative;
+  top:46%; right: 34%;
+  z-index: 3;
+  width: 36%;
+  height: 33%;
+}
+
+.matched {
+  display: none;
+}
+
+.selected {
+  border: 6px solid rgb(169, 219, 20);
+}
+
+.color-1 {
+  background-color: gold;
+}
+
+.color-2 {
+  background-color: crimson;
+}
+
+.color-3 {
+  background-color: navajowhite;
+  /* lightgoldenrodyellow */
+}
+
+.color-4 {
+  background-color: turquoise;
+}
+
+.color-5 {
+  background-color: lavenderblush;
+ 
+}
+
+.color-6 {
+  background-color: lightblue;
+  /* alice blue ?? */
+  ;
+}
+
+.color-7 {
+  background-color: mediumaquamarine;
+  /*cornflowerblue;*/
+   }
+
+
+.color-11 {
+  background-color: orangered;
+  /* or consider coral */
+}
+
+.color-12 {
+  background-color: lemonchiffon;
+ /*wheat*/
+}
+
+.color-13 {
+  background-color: plum;
+}
+
+.color-14 {
+  background-color: whitesmoke; 
+}
+
+.color-15 {
+  background-color: black;
+}
+
+.color-16 {
+  background-color: yellowgreen; 
+}
+
+.color-17 {
+  background-color: blue; 
+}
+
+.color-18 {
+  background-color: lightcyan; 
+}
+
+.color-19 {
+  background-color: coral;
+  /* or consider orange */
+}
+
+
+.color-21 {
+  background-color: azure;
+}
+
+.color-22 {
+  background-color: orange;
+}
+
+.color-23 {
+  background-color: forestgreen;
+}
+
+.color-24 {
+  background-color: hotpink
+}
+
+.color-25 {
+  background-color: deeppink;
+}
+
+.color-26 {
+  background-color: blueviolet;
+}
+
+.color-27 {
+  background-color: olive;
+}
+
+.color-28 {
+  background-color: teal;
+}
+
+.color-29 {
+  background-color: midnightblue;
+}
+
+
+button {
+  text-align: center;
+  background-color: #000;
+  border: none;
+  margin: 0 10px 30px;
+  padding: 6px 60px;
+  height: 50px;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+
