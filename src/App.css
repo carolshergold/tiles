@@ -46,7 +46,15 @@ h1 {
   height: 33%;
 }
 
-.matched {
+.layer-back.matched {
+  display: none;
+}
+
+.layer-mid.matched {
+  opacity: 0%;
+}
+
+.layer-front.matched {
   display: none;
 }
 
