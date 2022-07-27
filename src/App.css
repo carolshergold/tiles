@@ -6,12 +6,30 @@ h1 {
 .container {
   display: flex;
   justify-content: center;
+  padding: 2em;
+  background-color: gainsboro;
 }
 
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  width:500px;
+  width:560px;
+}
+
+.combo {
+  display: inline-block;
+}
+
+.combo-label {
+  font-family: Calibri, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  width: 280px;
+}
+
+.streak-length {
+  font-size: 50px;
+  font-weight: 700;
 }
 
 .cell {
@@ -81,7 +99,6 @@ h1 {
 
 .color-5 {
   background-color: lavenderblush;
- 
 }
 
 .color-6 {
@@ -93,8 +110,7 @@ h1 {
 .color-7 {
   background-color: mediumaquamarine;
   /*cornflowerblue;*/
-   }
-
+  }
 
 .color-11 {
   background-color: orangered;
@@ -132,9 +148,7 @@ h1 {
 
 .color-19 {
   background-color: coral;
-  /* or consider orange */
 }
-
 
 .color-21 {
   background-color: azure;

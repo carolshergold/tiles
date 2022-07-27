@@ -5,7 +5,8 @@ import SingleTile from './components/SingleTile.js'
 
 function App() {
   const [tiles, setTiles] = useState([])
-  const [streak, setStreak] = useState(0)
+  const [currentStreak, setCurrentStreak] = useState(0)
+  const [longestStreak, setLongestStreak] = useState(0)
   const [selected, setSelected] = useState(null)
   const [playerMove, setPlayerMove] = useState(null)
 
@@ -46,7 +47,8 @@ function App() {
     setSelected(tmp)
     console.log("New selected: ", tmp)
     setTiles(generatedTiles)
-    setStreak(0)
+    setCurrentStreak(0)
+    setLongestStreak(0)
     setPlayerMove(null)
   }
 
@@ -93,13 +95,24 @@ function App() {
       }
       setPlayerMove(null);
       setTiles(tilesClone);
-      matched ? setStreak(streak + 1) : setStreak(0);
+      if (matched) {
+        // If the current streak and the longest streak are equal, then increment the longest streak
+        if (longestStreak == currentStreak) {
+          setLongestStreak(longestStreak => longestStreak + 1) ;
+        }
+        // In any case, increment the current streak
+        setCurrentStreak(currentStreak => currentStreak + 1);
+      }
+      else {
+        setCurrentStreak(0);
+      }
     }
   })
 
   return (
     <div>
-      <h1>Tiles v3 - React and JSX</h1>
+      <h1>Tiles v4 - UI improvements</h1>
+      <hr />
       <button onClick={generateTileSet}>Play</button>
       <div className="container">
         <div className="tile-grid">
@@ -111,10 +124,17 @@ function App() {
             handleInput={handleInput}  
           />
           ))}
-          <div class="combo-string">Current combo: {streak}</div>
-          <div class="combo-string">Longest combo: </div>
+        </div>
+        <div className="combo">
+          <div className="combo-label">Current combo:  <br />
+            <span className = "streak-length">{currentStreak} </span>
+          </div>
+          <div className = "combo-label">Longest combo:  <br />
+          <span className = "streak-length">{longestStreak} </span>
+          </div>
         </div>
       </div>
+
     </div>
   );
 }
