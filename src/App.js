@@ -5,9 +5,11 @@ import SingleTile from './components/SingleTile.js'
 
 function App() {
   const [tiles, setTiles] = useState([])
-  const [streak, setStreak] = useState(0)
+  const [currentStreak, setCurrentStreak] = useState(0)
+  const [longestStreak, setLongestStreak] = useState(0)
   const [selected, setSelected] = useState(null)
   const [playerMove, setPlayerMove] = useState(null)
+  const [userMessage, setUserMessage] = useState(null)
 
   // Generate arrays to hold the tile elements
   var bg = []
@@ -39,24 +41,34 @@ function App() {
         "id": i,
         "bg": "layer-back color-" + bgGenerated[i-1],
         "mid": "layer-mid color-" + midGenerated[i-1],
-        "fg": "layer-front color-" + fgGenerated[i-1]
+        "fg": "layer-front color-" + fgGenerated[i-1],
+        "finished": false
       }
     }
     var tmp = Math.floor(Math.random() * 30) + 1
     setSelected(tmp)
     console.log("New selected: ", tmp)
     setTiles(generatedTiles)
-    setStreak(0)
+    setCurrentStreak(0)
+    setLongestStreak(0)
     setPlayerMove(null)
   }
 
   // Handle the player input
   const handleInput = (tile) => {
-    console.log("Inside handleInput, value of selected is: ", selected)
-    //  If selected has already got a value, update the state and evaluate the move
-    selected ? setPlayerMove(tile.id) :
-    // If selected doesn't have a value, then update the state of selected
-              setSelected(tile.id)
+    let finished = tile.finished ? 'finished' : 'not finished'
+    console.log("Inside handleInput, tile ", tile.id,  " status is:", finished)
+
+    // Only proceed to process the chosen tile if the tile still has at least one layer
+    // left to match -e.g. is not yet finished
+    if (! tile.finished) {
+      //  If selected has already got a value, update the state for playerMove 
+      selected ? setPlayerMove(tile.id) :
+      // If selected doesn't have a value, then update the state of selected
+                setSelected(tile.id)
+      // Null any user message
+      setUserMessage(null)
+    }
   }
 
   useEffect(() => {
@@ -75,7 +87,9 @@ function App() {
         console.log("tilesClone[selected][layer]", tilesClone[selected][layer]);
         console.log("tilesClone[playerMove][layer]", tilesClone[playerMove][layer]);
         console.log("-----");
-        if  (tilesClone[selected][layer] == tilesClone[playerMove][layer]) {
+        if  (tilesClone[selected][layer] == tilesClone[playerMove][layer]
+              && tilesClone[selected][layer].search('matched') < 0
+              && tilesClone[playerMove][layer].search('matched') < 0) {
           tilesClone[selected][layer] = tilesClone[selected][layer] + " matched";
           tilesClone[playerMove][layer] = tilesClone[selected][layer];
           matched = true;
@@ -86,20 +100,34 @@ function App() {
       if (tilesClone[playerMove]['bg'].search('matched') >= 0
                     && tilesClone[playerMove]['mid'].search('matched') >= 0
                     && tilesClone[playerMove]['fg'].search('matched') >= 0) {
+        tilesClone[playerMove].finished = true
         setSelected(null);
+        setUserMessage(<div className='user-message'>go anywhere</div>)
       }
       else {
         setSelected(playerMove);
       }
       setPlayerMove(null);
       setTiles(tilesClone);
-      matched ? setStreak(streak + 1) : setStreak(0);
+      if (matched) {
+        // If the current streak and the longest streak are equal, then increment the longest streak
+        if (longestStreak == currentStreak) {
+          setLongestStreak(longestStreak => longestStreak + 1) ;
+        }
+        // In any case, increment the current streak
+        setCurrentStreak(currentStreak => currentStreak + 1);
+      }
+      else {
+        setCurrentStreak(0);
+        setUserMessage((<div className='user-message'>no match</div>))
+      }
     }
   })
 
   return (
     <div>
-      <h1>Tiles v3 - React and JSX</h1>
+      <h1>Tiles v4 - UI improvements</h1>
+      <hr />
       <button onClick={generateTileSet}>Play</button>
       <div className="container">
         <div className="tile-grid">
@@ -111,10 +139,19 @@ function App() {
             handleInput={handleInput}  
           />
           ))}
-          <div class="combo-string">Current combo: {streak}</div>
-          <div class="combo-string">Longest combo: </div>
+        </div>
+        <div className="combo">
+          <div className="combo-label">Current combo:  <br />
+            <span className = "streak-length">{currentStreak} </span>
+          </div>
+          <div className = "combo-label">Longest combo:  <br />
+            <span className = "streak-length">{longestStreak} </span>
+          </div>
+          <div className="user-message">{userMessage}</div>
         </div>
       </div>
+      
+
     </div>
   );
 }
