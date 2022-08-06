@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css';
 import SingleTile from './components/SingleTile.js'
+import StreakPanel from './components/StreakPanel'
+import StartPage from './components/StartPage'
 
 
 function App() {
@@ -10,6 +12,8 @@ function App() {
   const [selected, setSelected] = useState(null)
   const [playerMove, setPlayerMove] = useState(null)
   const [userMessage, setUserMessage] = useState(null)
+
+  const pageTitle = 'Tiles v5 - refactoring into components';
 
   // Generate arrays to hold the tile elements
   var bg = []
@@ -126,9 +130,11 @@ function App() {
 
   return (
     <div>
-      <h1>Tiles v4 - UI improvements</h1>
-      <hr />
-      <button onClick={generateTileSet}>Play</button>
+      <StartPage
+        pageTitle={pageTitle}
+        generateTileSet={generateTileSet}
+
+      />
       <div className="container">
         <div className="tile-grid">
           {tiles.map(tile => (
@@ -140,15 +146,11 @@ function App() {
           />
           ))}
         </div>
-        <div className="combo">
-          <div className="combo-label">Current combo:  <br />
-            <span className = "streak-length">{currentStreak} </span>
-          </div>
-          <div className = "combo-label">Longest combo:  <br />
-            <span className = "streak-length">{longestStreak} </span>
-          </div>
-          <div className="user-message">{userMessage}</div>
-        </div>
+        <StreakPanel
+            currentStreak={currentStreak}
+            longestStreak={longestStreak}
+            userMessage={userMessage}
+        />
       </div>
       
 
