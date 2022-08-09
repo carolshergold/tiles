@@ -13,7 +13,7 @@ function App() {
   const [playerMove, setPlayerMove] = useState(null)
   const [userMessage, setUserMessage] = useState(null)
 
-  const pageTitle = 'Tiles v5 - refactoring into components';
+  const pageTitle = 'Tiles v6 - add tests';
 
   // Generate arrays to hold the tile elements
   var bg = []
