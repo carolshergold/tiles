@@ -21,12 +21,22 @@ describe('App', () => {
     /* Note that the whole background philosophy behind React Testing Library is to 
     prioritise testing using strategies that the actual user will adopt. Therefore its
     query selectors are all focussed on visible elements such as the role of an element, or
-    its text. However, there is very little text in the grid rendering of the tiles.
-    It therefore seems like a clean solution to revert to using document.query type selectors
+    its text. However, there no text or roles in the grid rendering of the tiles.
+    It therefore seems like a reasonable solution to revert to using document.query type selectors
     where necessary
     see: https://www.javascripttutorial.net/javascript-dom/javascript-queryselector/
     */
   });
-  // 
+  
+  test('all tile layers are visible at the start of the game', () => {
+    render(<App />);
+    const buttonElement = screen.getByRole('button', {name: /Play/i});
+    fireEvent.click(buttonElement);
+    const layerElements = document.querySelectorAll(".layer-back, .layer-mid, .layer-front");
+    expect(layerElements.length).toBe(90);
+    for (const e of layerElements) {
+      expect(e).toBeVisible
+    }
+  });
 
   })
