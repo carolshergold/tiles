@@ -10,7 +10,7 @@ export default function SingleTile({ tile, handleInput, selected }) {
 
 
   return (
-    <div key={tile.id} id={tile.id} 
+    <div key={tile.id} id={tile.id} data-testid="tile"
                 className={"cell" +  (tile.id == selected ? " selected" : "")}
                 onClick={handleClick}>
       <div className={tile.bg}></div> 
