@@ -1,12 +1,12 @@
 import '../App.css';
 
-export default function StartPage ({pageTitle, generateTileSet}) {
+export default function StartPage ({pageTitle, startNewGame}) {
 
   return(
     <div>
       <h1>{pageTitle}</h1>
       <hr />
-      <button onClick={generateTileSet}>Play</button>
+      <button onClick={startNewGame}>Play</button>
     </div>
   ) 
 
