@@ -4,8 +4,7 @@ import SingleTile from './SingleTile.js'
 import StreakPanel from './StreakPanel'
 import StartPage from './StartPage'
 
-export default function Game({ generateTileSet}) {
-  // pass in generateTileSet as a function in props
+export default function Game({ generateTileSet, startTile}) {
 
   const [tiles, setTiles] = useState([])
   const [currentStreak, setCurrentStreak] = useState(0)
@@ -18,10 +17,10 @@ export default function Game({ generateTileSet}) {
 
   const startNewGame = () => {
     console.log("Start new game")
-    var tmp = Math.floor(Math.random() * 30) + 1
-    setSelected(tmp)
-    console.log("New selected: ", tmp)
+    setSelected(startTile)
+    console.log("New selected: ", startTile)
     const tiles = generateTileSet();
+    console.log(tiles);
     setTiles(tiles)
     setCurrentStreak(0)
     setLongestStreak(0)
@@ -69,12 +68,19 @@ export default function Game({ generateTileSet}) {
           matched = true;
         }
       }
+      // Update finished status of the 2 Tiles
+      let tilesInPlay = [selected, playerMove];
+      for (const t of tilesInPlay) {
+        if (tilesClone[t]['bg'].search('matched') >= 0
+                      && tilesClone[t]['mid'].search('matched') >= 0
+                      && tilesClone[t]['fg'].search('matched') >= 0) 
+        {
+          tilesClone[t].finished = true;
+        }
+      }  
       // Have all layers in playerMove now been matched?
       // If so, then we will allow the player to pick a new starting point without destroying their streak
-      if (tilesClone[playerMove]['bg'].search('matched') >= 0
-                    && tilesClone[playerMove]['mid'].search('matched') >= 0
-                    && tilesClone[playerMove]['fg'].search('matched') >= 0) {
-        tilesClone[playerMove].finished = true
+      if (tilesClone[playerMove].finished) {
         setSelected(null);
         setUserMessage(<div className='user-message'>go anywhere</div>)
       }
@@ -112,6 +118,7 @@ export default function Game({ generateTileSet}) {
             tile={tile} 
             selected={selected}
             handleInput={handleInput}  
+            isFinished={tile.finished}
           />
           ))}
         </div>
