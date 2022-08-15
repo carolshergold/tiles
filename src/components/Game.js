@@ -4,7 +4,7 @@ import SingleTile from './SingleTile.js'
 import StreakPanel from './StreakPanel'
 import StartPage from './StartPage'
 
-export default function Game({ generateTileSet, startTile}) {
+export default function Game({ initialTiles, startTile}) {
 
   const [tiles, setTiles] = useState([])
   const [currentStreak, setCurrentStreak] = useState(0)
@@ -19,7 +19,7 @@ export default function Game({ generateTileSet, startTile}) {
     console.log("Start new game")
     setSelected(startTile)
     console.log("New selected: ", startTile)
-    const tiles = generateTileSet();
+    const tiles = initialTiles;
     console.log(tiles);
     setTiles(tiles)
     setCurrentStreak(0)
@@ -82,7 +82,7 @@ export default function Game({ generateTileSet, startTile}) {
       // If so, then we will allow the player to pick a new starting point without destroying their streak
       if (tilesClone[playerMove].finished) {
         setSelected(null);
-        setUserMessage(<div className='user-message'>go anywhere</div>)
+        setUserMessage('go anywhere')
       }
       else {
         setSelected(playerMove);
@@ -99,7 +99,7 @@ export default function Game({ generateTileSet, startTile}) {
       }
       else {
         setCurrentStreak(0);
-        setUserMessage((<div className='user-message'>no match</div>))
+        setUserMessage('no match')
       }
     }
   })

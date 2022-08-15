@@ -42,13 +42,13 @@ function App() {
     return generatedTiles;
   }
 
-  
+  const tiles = generateTileSet();
   var startTile = Math.floor(Math.random() * 30) + 1;
   
   return (
     <div>
       <Game
-        generateTileSet={generateTileSet}
+        initialTiles={tiles}
         startTile={startTile}
       />
     </div>
